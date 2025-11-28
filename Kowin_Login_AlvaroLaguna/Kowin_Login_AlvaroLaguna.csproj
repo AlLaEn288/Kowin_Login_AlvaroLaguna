@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Imagenes\Alan.jfif" />
+    <None Remove="Imagenes\Alien.jfif" />
+    <None Remove="Imagenes\Amnesia.jpg" />
+    <None Remove="Imagenes\Ark.jfif" />
+    <None Remove="Imagenes\Assassins.png" />
+    <None Remove="Imagenes\Bladurs.jpg" />
+    <None Remove="Imagenes\Cyberpunk2077.jpg" />
+    <None Remove="Imagenes\Diablo.jpg" />
+    <None Remove="Imagenes\Elden.jpg" />
+    <None Remove="Imagenes\FinalF.jpg" />
+    <None Remove="Imagenes\GtaV.jpg" />
+    <None Remove="Imagenes\Mdw3.png" />
+    <None Remove="Imagenes\Outlast.jpg" />
+    <None Remove="Imagenes\Raft.jpg" />
+    <None Remove="Imagenes\Re4.jpg" />
+    <None Remove="Imagenes\Rust.jpg" />
+    <None Remove="Imagenes\Silent.png" />
+    <None Remove="Imagenes\Sons.jpg" />
+    <None Remove="Imagenes\Spiderman.jpg" />
+    <None Remove="Imagenes\Starfield.jpg" />
+    <None Remove="Imagenes\Subnautica.jpg" />
+    <None Remove="Imagenes\Witcher.jfif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Imagenes\Alan.jfif" />
+    <Resource Include="Imagenes\Alien.jfif" />
+    <Resource Include="Imagenes\Amnesia.jpg" />
+    <Resource Include="Imagenes\Ark.jfif" />
+    <Resource Include="Imagenes\Assassins.png" />
+    <Resource Include="Imagenes\Bladurs.jpg" />
+    <Resource Include="Imagenes\Diablo.jpg" />
+    <Resource Include="Imagenes\Elden.jpg" />
+    <Resource Include="Imagenes\FinalF.jpg" />
+    <Resource Include="Imagenes\Mdw3.png" />
+    <Resource Include="Imagenes\Outlast.jpg" />
+    <Resource Include="Imagenes\Re4.jpg" />
+    <Resource Include="Imagenes\Silent.png" />
+    <Resource Include="Imagenes\Spiderman.jpg" />
+    <Resource Include="Imagenes\Starfield.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Imagenes\Cyberpunk2077.jpg" />
+    <Resource Include="Imagenes\GtaV.jpg" />
+    <Resource Include="Imagenes\Raft.jpg" />
+    <Resource Include="Imagenes\Rust.jpg" />
+    <Resource Include="Imagenes\Sons.jpg" />
+    <Resource Include="Imagenes\Subnautica.jpg" />
+    <Resource Include="Imagenes\Witcher.jfif" />
+  </ItemGroup>
+
+</Project>

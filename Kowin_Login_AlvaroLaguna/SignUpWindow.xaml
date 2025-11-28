@@ -1,0 +1,37 @@
+﻿<Window x:Class="Kowin_Login_AlvaroLaguna.SignUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KoWin - Registro" Height="550" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="Black" ResizeMode="NoResize" WindowStyle="None">
+
+    <Border BorderBrush="#FF0000" BorderThickness="1">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+                <TextBlock Text="CREAR CUENTA" FontSize="24" FontWeight="Bold" Foreground="White" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Nombre de Usuario" Foreground="Gray" Margin="0,5"/>
+                <TextBox x:Name="txtNewUser" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+
+                <TextBlock Text="Email" Foreground="Gray" Margin="0,10,0,5"/>
+                <TextBox x:Name="txtEmail" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+
+                <TextBlock Text="Contraseña" Foreground="Gray" Margin="0,10,0,5"/>
+                <PasswordBox x:Name="txtNewPass" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+
+                <TextBlock Text="Confirmar Contraseña" Foreground="Gray" Margin="0,10,0,5"/>
+                <PasswordBox x:Name="txtConfirmPass" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+
+                <TextBlock x:Name="lblErrorRegistro" Foreground="Red" Margin="0,10" Visibility="Collapsed" TextAlignment="Center"/>
+
+                <Button Content="REGISTRARSE" Margin="0,20,0,10" Height="35" 
+                        Background="White" Foreground="Black" FontWeight="Bold" BorderThickness="0"
+                        Click="BtnRegistrar_Click" Cursor="Hand"/>
+
+                <Button Content="Volver al Login" Background="Transparent" Foreground="Gray" BorderThickness="0"
+                        Click="BtnVolver_Click" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
