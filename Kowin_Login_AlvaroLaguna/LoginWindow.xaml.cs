@@ -23,31 +23,51 @@ namespace Kowin_Login_AlvaroLaguna
                 return;
             }
 
-            // Llamamos al validador nuevo
+            // Llamamos al validador de MySQL
             ResultadoLogin resultado = UserManager.ValidarUsuario(usuario, pass);
 
             switch (resultado)
             {
                 case ResultadoLogin.Exito:
-                    // TC 01: Login Exitoso
+                    // === EVIDENCIA 1: LOGIN EXITOSO ===
+                    // Mostramos un mensaje explícito confirmando la conexión a MySQL
+                    MessageBox.Show($"[MySQL] Conexión Exitosa.\nSe ha verificado el usuario '{usuario}' en la base de datos 'kowin_db'.\nAcceso Concedido.",
+                                    "Verificación MySQL - Éxito",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information);
+
+                    // Abrimos el Home
                     MainWindow home = new MainWindow(usuario);
                     home.Show();
                     this.Close();
                     break;
 
                 case ResultadoLogin.UsuarioNoExiste:
-                    // TC 03: Usuario no existe
-                    MostrarError("El usuario introducido no existe");
+                    // === EVIDENCIA 2: USUARIO NO ENCONTRADO ===
+                    MessageBox.Show($"[MySQL] Consulta Finalizada.\nEl usuario '{usuario}' NO existe en la tabla 'usuarios'.",
+                                    "Verificación MySQL - Fallo",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
                     break;
 
                 case ResultadoLogin.PasswordIncorrecto:
-                    // TC 02: Contraseña mal
-                    MostrarError("La contraseña introducida no es correcta");
+                    // === EVIDENCIA 2: CONTRASEÑA INCORRECTA ===
+                    MessageBox.Show($"[MySQL] Consulta Finalizada.\nEl usuario existe, pero la contraseña no coincide con el registro en la base de datos.",
+                                    "Verificación MySQL - Fallo",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
                     break;
 
                 case ResultadoLogin.UsuarioBloqueado:
-                    // TC 07: Bloqueo
-                    MostrarError("Usuario bloqueado temporalmente (1 min)");
+                    // === EVIDENCIA: BLOQUEO ===
+                    MessageBox.Show("[MySQL] Acceso Denegado.\nEl campo 'fecha_fin_bloqueo' indica que este usuario está temporalmente bloqueado.",
+                                    "Verificación MySQL - Bloqueo",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+                    break;
+
+                case ResultadoLogin.ErrorBaseDatos:
+                    MessageBox.Show("Error crítico: No se pudo conectar al servidor MySQL.", "Error de Conexión", MessageBoxButton.OK, MessageBoxImage.Hand);
                     break;
             }
         }
@@ -67,7 +87,6 @@ namespace Kowin_Login_AlvaroLaguna
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
-            // TC 06: Salir de la aplicación
             Application.Current.Shutdown();
         }
     }

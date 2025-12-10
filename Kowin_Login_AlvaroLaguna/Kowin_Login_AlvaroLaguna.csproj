@@ -19,8 +19,11 @@
     <None Remove="Imagenes\Diablo.jpg" />
     <None Remove="Imagenes\Elden.jpg" />
     <None Remove="Imagenes\FinalF.jpg" />
+    <None Remove="Imagenes\fondokowin.jpg" />
     <None Remove="Imagenes\GtaV.jpg" />
     <None Remove="Imagenes\Mdw3.png" />
+    <None Remove="Imagenes\Meme1.jpg" />
+    <None Remove="Imagenes\Meme2.jpg" />
     <None Remove="Imagenes\Outlast.jpg" />
     <None Remove="Imagenes\Raft.jpg" />
     <None Remove="Imagenes\Re4.jpg" />
@@ -34,6 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Imagenes\Alan.jfif" />
     <Resource Include="Imagenes\Alien.jfif" />
     <Resource Include="Imagenes\Amnesia.jpg" />
@@ -43,7 +50,10 @@
     <Resource Include="Imagenes\Diablo.jpg" />
     <Resource Include="Imagenes\Elden.jpg" />
     <Resource Include="Imagenes\FinalF.jpg" />
+    <Resource Include="Imagenes\fondokowin.jpg" />
     <Resource Include="Imagenes\Mdw3.png" />
+    <Resource Include="Imagenes\Meme1.jpg" />
+    <Resource Include="Imagenes\Meme2.jpg" />
     <Resource Include="Imagenes\Outlast.jpg" />
     <Resource Include="Imagenes\Re4.jpg" />
     <Resource Include="Imagenes\Silent.png" />

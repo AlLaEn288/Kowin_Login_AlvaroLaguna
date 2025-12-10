@@ -23,13 +23,13 @@ namespace Kowin_Login_AlvaroLaguna
                 return;
             }
 
+            // Validar si existe (Conecta a BD)
             if (UserManager.ExisteUsuario(txtNewUser.Text))
             {
                 MostrarError("El usuario ya existe");
                 return;
             }
 
-            // CREAR USUARIO
             Usuario nuevo = new Usuario
             {
                 NombreUsuario = txtNewUser.Text,
@@ -37,14 +37,27 @@ namespace Kowin_Login_AlvaroLaguna
                 Email = txtEmail.Text
             };
 
-            UserManager.RegistrarUsuario(nuevo);
+            // Intentar registrar en MySQL
+            bool registroExitoso = UserManager.RegistrarUsuario(nuevo);
 
-            MessageBox.Show("Usuario creado con éxito. Ahora inicia sesión.");
+            if (registroExitoso)
+            {
+                // === EVIDENCIA 3: USUARIO CREADO EN MYSQL ===
+                // Mensaje técnico para la captura del profesor
+                MessageBox.Show($"[MySQL] INSERT EXITOSO.\n\nEl usuario '{nuevo.NombreUsuario}' se ha registrado correctamente en la tabla 'usuarios' de la base de datos 'kowin_db'.\n\nRegistro ID generado y guardado.",
+                                "Verificación MySQL - Registro",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
 
-            // Volver al Login
-            LoginWindow login = new LoginWindow();
-            login.Show();
-            this.Close();
+                // Volver al Login
+                LoginWindow login = new LoginWindow();
+                login.Show();
+                this.Close();
+            }
+            else
+            {
+                MostrarError("Error al conectar con la base de datos MySQL.");
+            }
         }
 
         private void BtnVolver_Click(object sender, RoutedEventArgs e)

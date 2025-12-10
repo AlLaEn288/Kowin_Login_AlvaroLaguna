@@ -1,37 +1,60 @@
 ﻿<Window x:Class="Kowin_Login_AlvaroLaguna.SignUpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="KoWin - Registro" Height="550" Width="400"
+        Title="KoWin - Registro" Height="600" Width="450"
         WindowStartupLocation="CenterScreen"
         Background="Black" ResizeMode="NoResize" WindowStyle="None">
 
     <Border BorderBrush="#FF0000" BorderThickness="1">
         <Grid>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-                <TextBlock Text="CREAR CUENTA" FontSize="24" FontWeight="Bold" Foreground="White" 
-                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <!-- 1. FONDO COMPLETO -->
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Imagenes/FondoKowin.jpg" Stretch="UniformToFill" Opacity="0.6"/>
+            </Grid.Background>
 
-                <TextBlock Text="Nombre de Usuario" Foreground="Gray" Margin="0,5"/>
-                <TextBox x:Name="txtNewUser" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+            <!-- 2. CAJA CENTRAL -->
+            <Border Background="#CC050505" CornerRadius="15" BorderBrush="#333" BorderThickness="1"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Padding="30" Width="380">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="5" Opacity="0.5"/>
+                </Border.Effect>
 
-                <TextBlock Text="Email" Foreground="Gray" Margin="0,10,0,5"/>
-                <TextBox x:Name="txtEmail" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+                <StackPanel>
+                    <TextBlock Text="CREAR CUENTA" FontSize="28" FontWeight="Bold" Foreground="White" 
+                               HorizontalAlignment="Center" Margin="0,0,0,20">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Red" BlurRadius="5" Opacity="0.5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
 
-                <TextBlock Text="Contraseña" Foreground="Gray" Margin="0,10,0,5"/>
-                <PasswordBox x:Name="txtNewPass" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+                    <TextBlock Text="Nombre de Usuario" Foreground="Gray" Margin="0,5"/>
+                    <TextBox x:Name="txtNewUser" Background="#222" Foreground="White" BorderBrush="#444" Padding="5" Height="30"/>
 
-                <TextBlock Text="Confirmar Contraseña" Foreground="Gray" Margin="0,10,0,5"/>
-                <PasswordBox x:Name="txtConfirmPass" Background="#111111" Foreground="White" BorderBrush="#333333" Padding="5"/>
+                    <TextBlock Text="Email" Foreground="Gray" Margin="0,10,0,5"/>
+                    <TextBox x:Name="txtEmail" Background="#222" Foreground="White" BorderBrush="#444" Padding="5" Height="30"/>
 
-                <TextBlock x:Name="lblErrorRegistro" Foreground="Red" Margin="0,10" Visibility="Collapsed" TextAlignment="Center"/>
+                    <TextBlock Text="Contraseña" Foreground="Gray" Margin="0,10,0,5"/>
+                    <PasswordBox x:Name="txtNewPass" Background="#222" Foreground="White" BorderBrush="#444" Padding="5" Height="30"/>
 
-                <Button Content="REGISTRARSE" Margin="0,20,0,10" Height="35" 
-                        Background="White" Foreground="Black" FontWeight="Bold" BorderThickness="0"
-                        Click="BtnRegistrar_Click" Cursor="Hand"/>
+                    <TextBlock Text="Confirmar Contraseña" Foreground="Gray" Margin="0,10,0,5"/>
+                    <PasswordBox x:Name="txtConfirmPass" Background="#222" Foreground="White" BorderBrush="#444" Padding="5" Height="30"/>
 
-                <Button Content="Volver al Login" Background="Transparent" Foreground="Gray" BorderThickness="0"
-                        Click="BtnVolver_Click" Cursor="Hand"/>
-            </StackPanel>
+                    <TextBlock x:Name="lblErrorRegistro" Foreground="Red" Margin="0,10" Visibility="Collapsed" TextAlignment="Center"/>
+
+                    <Button Content="REGISTRARSE" Margin="0,20,0,10" Height="40" 
+                            Background="White" Foreground="Black" FontWeight="Bold" BorderThickness="0"
+                            Click="BtnRegistrar_Click" Cursor="Hand">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button Content="Volver al Login" Background="Transparent" Foreground="Gray" BorderThickness="0"
+                            Click="BtnVolver_Click" Cursor="Hand"/>
+                </StackPanel>
+            </Border>
         </Grid>
     </Border>
 </Window>
