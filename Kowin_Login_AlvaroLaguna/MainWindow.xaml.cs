@@ -16,19 +16,36 @@ namespace Kowin_Login_AlvaroLaguna
         public MainWindow(string nombreUsuario)
         {
             InitializeComponent();
-            if (TxtUsuario != null) TxtUsuario.Text = nombreUsuario;
+            if (TxtUsuario != null)
+            {
+                TxtUsuario.Text = nombreUsuario;
+            }
+
+            // Comprobar si es Admin para mostrar el botón
+            Usuario u = UserManager.ObtenerUsuario(nombreUsuario);
+            if (u != null && u.Rol == "Admin")
+            {
+                BtnAdminPanel.Visibility = Visibility.Visible;
+            }
 
             CargarJuegos();
             AplicarIdioma();
             CargarDatosAmigos();
 
-            // Cargar posts de comunidad
             CargarComunidad();
 
             chatTimer = new DispatcherTimer();
             chatTimer.Interval = TimeSpan.FromSeconds(2);
             chatTimer.Tick += ChatTimer_Tick;
             chatTimer.Start();
+        }
+
+        // --- BOTÓN ADMIN (NUEVO) ---
+        private void BtnAdminPanel_Click(object sender, MouseButtonEventArgs e)
+        {
+            AdminWindow admin = new AdminWindow(TxtUsuario.Text);
+            admin.Show();
+            // No cerramos el Home, solo abrimos el panel encima
         }
 
         private void ChatTimer_Tick(object sender, EventArgs e)

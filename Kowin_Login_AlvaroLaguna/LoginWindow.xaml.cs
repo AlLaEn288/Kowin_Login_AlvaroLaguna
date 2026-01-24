@@ -16,54 +16,40 @@ namespace Kowin_Login_AlvaroLaguna
             string usuario = txtUser.Text;
             string pass = txtPass.Password;
 
-            // TC 04: Campos vacíos
             if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(pass))
             {
                 MostrarError("Introduzca datos");
                 return;
             }
 
-            // Llamamos al validador de MySQL
             ResultadoLogin resultado = UserManager.ValidarUsuario(usuario, pass);
 
             switch (resultado)
             {
                 case ResultadoLogin.Exito:
-                    // === EVIDENCIA 1: LOGIN EXITOSO ===
-                    // Mostramos un mensaje explícito confirmando la conexión a MySQL
-                    MessageBox.Show($"[MySQL] Conexión Exitosa.\nSe ha verificado el usuario '{usuario}' en la base de datos 'kowin_db'.\nAcceso Concedido.",
-                                    "Verificación MySQL - Éxito",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Information);
+                    // CAMBIO: Ahora SIEMPRE vamos al Home, sea Admin o Nominal.
+                    // El Home ya decidirá si muestra el botón de Admin.
+                    MessageBox.Show($"Bienvenido {usuario}.", "Acceso Correcto", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Abrimos el Home
                     MainWindow home = new MainWindow(usuario);
                     home.Show();
                     this.Close();
                     break;
 
+                case ResultadoLogin.UsuarioBaneado:
+                    MessageBox.Show("Tu cuenta ha sido BANEADA por un administrador.\nNo puedes acceder.", "Acceso Denegado", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+
                 case ResultadoLogin.UsuarioNoExiste:
-                    // === EVIDENCIA 2: USUARIO NO ENCONTRADO ===
-                    MessageBox.Show($"[MySQL] Consulta Finalizada.\nEl usuario '{usuario}' NO existe en la tabla 'usuarios'.",
-                                    "Verificación MySQL - Fallo",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
+                    MessageBox.Show($"[MySQL] El usuario '{usuario}' NO existe.", "Error Login", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
 
                 case ResultadoLogin.PasswordIncorrecto:
-                    // === EVIDENCIA 2: CONTRASEÑA INCORRECTA ===
-                    MessageBox.Show($"[MySQL] Consulta Finalizada.\nEl usuario existe, pero la contraseña no coincide con el registro en la base de datos.",
-                                    "Verificación MySQL - Fallo",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
+                    MessageBox.Show($"[MySQL] Contraseña incorrecta.", "Error Login", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
 
                 case ResultadoLogin.UsuarioBloqueado:
-                    // === EVIDENCIA: BLOQUEO ===
-                    MessageBox.Show("[MySQL] Acceso Denegado.\nEl campo 'fecha_fin_bloqueo' indica que este usuario está temporalmente bloqueado.",
-                                    "Verificación MySQL - Bloqueo",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+                    MessageBox.Show("[MySQL] Usuario bloqueado temporalmente.", "Acceso Denegado", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
 
                 case ResultadoLogin.ErrorBaseDatos:
