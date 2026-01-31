@@ -10,7 +10,7 @@
         PreviewMouseWheel="Window_PreviewMouseWheel">
 
     <Window.Resources>
-        <!-- ESTILOS VISUALES -->
+        <!-- TUS ESTILOS ORIGINALES -->
         <Style x:Key="LogoStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -23,9 +23,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="SideMenuStyle" TargetType="Border">
-            <!-- Fondo semi-transparente para ver el wallpaper -->
             <Setter Property="Background" Value="#CC1A1A1A"/>
             <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="BorderBrush" Value="#FF0000"/>
@@ -37,19 +35,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="GameCardBorder" TargetType="Border">
             <Setter Property="Background" Value="#CC0f0f0f"/>
-            <!-- Semi-transparente -->
             <Setter Property="BorderBrush" Value="#800000"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Red" BlurRadius="8" ShadowDepth="0" Opacity="0.3"/>
-                </Setter.Value>
-            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="#FF0000"/>
@@ -62,28 +53,22 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="IsTabStop" Value="false"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border x:Name="rectangle" Background="#FF0000" CornerRadius="4"/>
+                        <Border Background="#FF0000" CornerRadius="4"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style TargetType="{x:Type ScrollBar}">
-            <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
-            <Setter Property="Foreground" Value="#FF0000"/>
-            <Setter Property="Background" Value="#111111"/>
+            <Setter Property="Background" Value="#111"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ScrollBar}">
-                        <Grid x:Name="GridRoot" Background="{TemplateBinding Background}">
-                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Track Name="PART_Track" IsDirectionReversed="true">
                                 <Track.Thumb>
                                     <Thumb Style="{StaticResource ScrollBarThumb}"/>
                                 </Track.Thumb>
@@ -92,90 +77,57 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="Orientation" Value="Vertical">
-                    <Setter Property="Width" Value="12"/>
-                    <Setter Property="Height" Value="Auto"/>
-                </Trigger>
-                <Trigger Property="Orientation" Value="Horizontal">
-                    <Setter Property="Width" Value="Auto"/>
-                    <Setter Property="Height" Value="12"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
     </Window.Resources>
 
     <Grid>
-        <!-- FONDO DE PANTALLA GLOBAL -->
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Imagenes/FondoKowin.jpg" Stretch="UniformToFill" Opacity="0.4"/>
         </Grid.Background>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- === BARRA SUPERIOR (Semi-transparente) === -->
+        <!-- BARRA SUPERIOR -->
         <Grid Grid.Row="0" Background="#E6111111">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="250"/>
-                <!-- Ampliado para que quepa el botón Admin -->
             </Grid.ColumnDefinitions>
-
             <TextBlock Text="KoWin" Style="{StaticResource LogoStyle}"/>
-
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock x:Name="TxtTienda" Text="TIENDA" Margin="15,0" FontWeight="Bold" Cursor="Hand" Foreground="White" MouseLeftButtonDown="BtnVolverTienda_Click"/>
                 <TextBlock x:Name="TxtComunidad" Text="COMUNIDAD" Margin="15,0" FontWeight="Bold" Cursor="Hand" Foreground="Gray" MouseLeftButtonDown="BtnComunidad_Click"/>
                 <TextBlock x:Name="TxtSoporte" Text="SOPORTE" Margin="15,0" FontWeight="Bold" Cursor="Hand" Foreground="Gray" MouseLeftButtonDown="BtnSoporte_Click"/>
             </StackPanel>
-
-            <!-- PERFIL + BOTÓN ADMIN -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
-
-                <!-- AQUÍ ESTÁ EL BOTÓN DE ADMIN QUE PEDISTE -->
                 <Border x:Name="BtnAdminPanel" Background="#800000" CornerRadius="5" Padding="10,5" Margin="0,0,15,0" Cursor="Hand" Visibility="Collapsed" MouseLeftButtonDown="BtnAdminPanel_Click">
                     <TextBlock Text="🛠️ GESTIÓN" Foreground="White" FontWeight="Bold" FontSize="12"/>
                 </Border>
-
                 <StackPanel VerticalAlignment="Center" Margin="0,0,10,0">
                     <TextBlock x:Name="TxtUsuario" Text="Usuario" Foreground="White" FontWeight="Bold" HorizontalAlignment="Right"/>
-                    <TextBlock x:Name="TxtCerrarSesion" Text="cerrar sesión" FontSize="10" Foreground="Gray" Cursor="Hand" 
-                               HorizontalAlignment="Right" MouseLeftButtonDown="BtnCerrarSesion_Click"
-                               TextDecorations="Underline"/>
+                    <TextBlock x:Name="TxtCerrarSesion" Text="cerrar sesión" FontSize="10" Foreground="Gray" Cursor="Hand" HorizontalAlignment="Right" MouseLeftButtonDown="BtnCerrarSesion_Click" TextDecorations="Underline"/>
                 </StackPanel>
                 <Border Width="32" Height="32" CornerRadius="16" Background="#333333" BorderBrush="#FF0000" BorderThickness="1"/>
             </StackPanel>
         </Grid>
 
-        <!-- === CONTENIDO PRINCIPAL === -->
         <Grid Grid.Row="1" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
-                <!-- Menú Lateral -->
                 <ColumnDefinition Width="*"/>
-                <!-- Contenido Central -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Panel Chat (Oculto) -->
             </Grid.ColumnDefinitions>
 
-            <!-- MENÚ LATERAL -->
+            <!-- MENÚ -->
             <Border x:Name="SideMenuBorder" Grid.Column="0" Style="{StaticResource SideMenuStyle}" Margin="0,0,20,0">
                 <StackPanel>
-                    <TextBlock x:Name="TxtDestacadosMenu" Text="Destacados" FontSize="18" Margin="0,20,0,15" Foreground="White" FontWeight="Bold" Cursor="Hand"
-                               MouseLeftButtonDown="BtnVolverTienda_Click"/>
-
-                    <TextBlock x:Name="TxtMisJuegos" Text="Mis juegos" FontSize="18" Margin="0,15" Foreground="#FF0000" FontWeight="Bold" Cursor="Hand"
-                               MouseLeftButtonDown="BtnMisJuegos_Click"/>
-
-                    <TextBlock x:Name="TxtConfiguracion" Text="Configuración" FontSize="18" Margin="0,15" Foreground="Gray" Cursor="Hand"
-                               MouseLeftButtonDown="BtnConfiguracion_Click"/>
-
+                    <TextBlock x:Name="TxtDestacadosMenu" Text="Destacados" FontSize="18" Margin="0,20,0,15" Foreground="White" FontWeight="Bold" Cursor="Hand" MouseLeftButtonDown="BtnVolverTienda_Click"/>
+                    <TextBlock x:Name="TxtMisJuegos" Text="Mis juegos" FontSize="18" Margin="0,15" Foreground="#FF0000" FontWeight="Bold" Cursor="Hand" MouseLeftButtonDown="BtnMisJuegos_Click"/>
+                    <TextBlock x:Name="TxtConfiguracion" Text="Configuración" FontSize="18" Margin="0,15" Foreground="Gray" Cursor="Hand" MouseLeftButtonDown="BtnConfiguracion_Click"/>
                     <Separator Margin="0,20" Background="#333333"/>
-
                     <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="BtnAmigos_Click">
                         <TextBlock x:Name="TxtAmigos" Text="Amigos" FontSize="18" Foreground="Gray" FontWeight="Bold"/>
                         <Border x:Name="NotificacionAmigos" Width="18" Height="18" Background="Red" CornerRadius="9" Margin="10,0,0,0" Visibility="Collapsed">
@@ -185,14 +137,10 @@
                 </StackPanel>
             </Border>
 
-            <!-- ZONA CENTRAL (TIENDA / AMIGOS / MIS JUEGOS) -->
             <Grid Grid.Column="1">
-
-                <!-- 1. VISTA TIENDA (JUEGOS) -->
+                <!-- TIENDA (CATÁLOGO) -->
                 <ScrollViewer x:Name="MainScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Margin="0,0,0,50">
-
-                        <!-- Destacados -->
                         <TextBlock x:Name="TxtHeaderDestacados" Text="Destacados" FontSize="26" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,30">
                             <ItemsControl x:Name="ListaDestacados">
@@ -204,7 +152,8 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,10,20,10">
-                                            <Border Width="400" Height="220" Style="{StaticResource GameCardBorder}">
+                                            <!-- AÑADIDO EVENTO CLIC AQUÍ -->
+                                            <Border Width="400" Height="220" Style="{StaticResource GameCardBorder}" Tag="{Binding}" MouseLeftButtonDown="TarjetaJuego_Click">
                                                 <Image Source="{Binding ImagenUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="{Binding Titulo}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
@@ -214,7 +163,7 @@
                             </ItemsControl>
                         </ScrollViewer>
 
-                        <!-- Lanzamientos -->
+                        <!-- REPITE ESTO PARA TODAS LAS LISTAS (Tag y MouseLeftButtonDown) -->
                         <TextBlock x:Name="TxtHeaderLanzamientos" Text="Últimos Lanzamientos" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,30">
                             <ItemsControl x:Name="ListaLanzamientos">
@@ -226,7 +175,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,10,15,10">
-                                            <Border Width="220" Height="300" Style="{StaticResource GameCardBorder}">
+                                            <Border Width="220" Height="300" Style="{StaticResource GameCardBorder}" Tag="{Binding}" MouseLeftButtonDown="TarjetaJuego_Click">
                                                 <Image Source="{Binding ImagenUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="{Binding Titulo}" Foreground="White" FontSize="14" FontWeight="SemiBold" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" MaxWidth="220"/>
@@ -236,7 +185,6 @@
                             </ItemsControl>
                         </ScrollViewer>
 
-                        <!-- Terror -->
                         <TextBlock x:Name="TxtHeaderTerror" Text="Terror y Suspense" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,30">
                             <ItemsControl x:Name="ListaTerror">
@@ -248,7 +196,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,10,15,10">
-                                            <Border Width="200" Height="280" Style="{StaticResource GameCardBorder}">
+                                            <Border Width="200" Height="280" Style="{StaticResource GameCardBorder}" Tag="{Binding}" MouseLeftButtonDown="TarjetaJuego_Click">
                                                 <Image Source="{Binding ImagenUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="{Binding Titulo}" Foreground="White" FontSize="14" FontWeight="Bold" TextTrimming="CharacterEllipsis" MaxWidth="200" HorizontalAlignment="Center"/>
@@ -258,7 +206,6 @@
                             </ItemsControl>
                         </ScrollViewer>
 
-                        <!-- Supervivencia -->
                         <TextBlock x:Name="TxtHeaderSupervivencia" Text="Supervivencia" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,30">
                             <ItemsControl x:Name="ListaSupervivencia">
@@ -270,7 +217,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,10,15,10">
-                                            <Border Width="300" Height="150" Style="{StaticResource GameCardBorder}">
+                                            <Border Width="300" Height="150" Style="{StaticResource GameCardBorder}" Tag="{Binding}" MouseLeftButtonDown="TarjetaJuego_Click">
                                                 <Image Source="{Binding ImagenUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="{Binding Titulo}" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
@@ -280,7 +227,6 @@
                             </ItemsControl>
                         </ScrollViewer>
 
-                        <!-- RPG -->
                         <TextBlock x:Name="TxtHeaderRPG" Text="RPG y Aventura" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,20">
                             <ItemsControl x:Name="ListaRPG">
@@ -292,7 +238,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10,10,15,10">
-                                            <Border Width="250" Height="250" Style="{StaticResource GameCardBorder}">
+                                            <Border Width="250" Height="250" Style="{StaticResource GameCardBorder}" Tag="{Binding}" MouseLeftButtonDown="TarjetaJuego_Click">
                                                 <Image Source="{Binding ImagenUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Border>
                                             <TextBlock Text="{Binding Titulo}" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
@@ -304,12 +250,72 @@
                     </StackPanel>
                 </ScrollViewer>
 
-                <!-- 2. VISTA GESTIÓN AMIGOS -->
+                <!-- MIS JUEGOS (BIBLIOTECA) -->
+                <Grid x:Name="VistaMisJuegos" Visibility="Collapsed" Margin="20,0,0,0">
+                    <StackPanel>
+                        <TextBlock x:Name="TxtTituloBiblioteca" Text="MI BIBLIOTECA" FontSize="24" FontWeight="Bold" Foreground="#FF0000" Margin="0,0,0,20"/>
+                        <TextBlock x:Name="TxtSubtituloBiblioteca" Text="Juegos instalados" Foreground="Gray" Margin="0,0,0,20"/>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Lista dinámica de juegos comprados -->
+                                <ItemsControl x:Name="ListaMisJuegos">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="250" Height="350" Background="#CC111111" Margin="0,0,20,0" CornerRadius="10" BorderBrush="#333" BorderThickness="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Image Source="{Binding ImagenUrl}" Stretch="UniformToFill" Margin="5,5,5,0" Opacity="0.8"/>
+                                                    <StackPanel Grid.Row="1" Margin="10">
+                                                        <TextBlock Text="{Binding Titulo}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,0,5"/>
+                                                        <Button Content="INSTALAR" Background="#333" Foreground="White" FontWeight="Bold" Height="35" BorderThickness="0"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <!-- KoWin Bird (Siempre ahí) -->
+                                <Border Width="250" Height="350" Background="#CC111111" Margin="0,0,20,0" CornerRadius="10" BorderBrush="#333" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Background="#87CEEB" Margin="5,5,5,0">
+                                            <TextBlock Text="🐦" FontSize="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <StackPanel Grid.Row="1" Margin="10">
+                                            <TextBlock Text="KoWin Bird" Foreground="White" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+                                            <TextBlock Text="Demo Exclusiva" Foreground="Gray" FontSize="12" Margin="0,0,0,15"/>
+                                            <Button x:Name="BtnTextoJugar" Content="▶ JUGAR AHORA" Background="#FF0000" Foreground="White" FontWeight="Bold" Height="40" BorderThickness="0" Cursor="Hand" Click="BtnJugarFlappy_Click">
+                                                <Button.Resources>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Grid>
+
+                <!-- OTRAS VISTAS (AMIGOS, COMUNIDAD, SOPORTE, CHAT... Mantenidas igual) -->
+                <!-- Copia el resto de tus vistas aquí como estaban -->
                 <Grid x:Name="VistaAmigos" Visibility="Collapsed" Margin="20,0,0,0">
                     <StackPanel>
                         <TextBlock x:Name="TxtTituloGestionAmigos" Text="GESTIÓN DE AMIGOS" FontSize="24" FontWeight="Bold" Foreground="#FF0000" Margin="0,0,0,20"/>
-
-                        <!-- Panel semi-transparente -->
                         <Border Background="#CC1A1A1A" Padding="15" CornerRadius="5" Margin="0,0,0,30">
                             <StackPanel>
                                 <TextBlock x:Name="TxtLabelAddAmigo" Text="Añadir amigo:" Foreground="Gray"/>
@@ -320,7 +326,6 @@
                                 <TextBlock x:Name="lblMensajeAmigo" Foreground="Yellow" Margin="0,5,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                         </Border>
-
                         <TextBlock x:Name="TxtLabelSolicitudes" Text="Solicitudes Pendientes" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
                         <ItemsControl x:Name="ListaSolicitudes">
                             <ItemsControl.ItemTemplate>
@@ -342,7 +347,6 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-
                         <TextBlock x:Name="TxtLabelMisAmigos" Text="Mis Amigos" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,20,0,10"/>
                         <ItemsControl x:Name="ListaAmigos">
                             <ItemsControl.ItemTemplate>
@@ -373,223 +377,148 @@
                         </ItemsControl>
                     </StackPanel>
                 </Grid>
-
-                <!-- 3. VISTA MIS JUEGOS -->
-                <Grid x:Name="VistaMisJuegos" Visibility="Collapsed" Margin="20,0,0,0">
-                    <StackPanel>
-                        <TextBlock x:Name="TxtTituloBiblioteca" Text="MI BIBLIOTECA" FontSize="24" FontWeight="Bold" Foreground="#FF0000" Margin="0,0,0,20"/>
-                        <TextBlock x:Name="TxtSubtituloBiblioteca" Text="Juegos instalados y listos para jugar" Foreground="Gray" Margin="0,0,0,20"/>
-
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                            <StackPanel Orientation="Horizontal">
-                                <Border Width="250" Height="350" Background="#CC111111" Margin="0,0,20,0" CornerRadius="10" BorderBrush="#333" BorderThickness="1">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Background="#87CEEB" Margin="5,5,5,0">
-                                            <TextBlock Text="🐦" FontSize="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Grid>
-                                        <StackPanel Grid.Row="1" Margin="10">
-                                            <TextBlock Text="KoWin Bird" Foreground="White" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
-                                            <TextBlock Text="Demo Exclusiva" Foreground="Gray" FontSize="12" Margin="0,0,0,15"/>
-                                            <Button x:Name="BtnTextoJugar" Content="▶ JUGAR AHORA" Background="#FF0000" Foreground="White" FontWeight="Bold" Height="40" BorderThickness="0" 
-                                                    Cursor="Hand" Click="BtnJugarFlappy_Click">
-                                                <Button.Resources>
-                                                    <Style TargetType="Border">
-                                                        <Setter Property="CornerRadius" Value="5"/>
-                                                    </Style>
-                                                </Button.Resources>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                                <Border Width="250" Height="350" Background="#CC111111" Margin="0,0,20,0" CornerRadius="10" BorderBrush="#333" BorderThickness="1">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Image Source="pack://application:,,,/Imagenes/Cyberpunk2077.jpg" Stretch="UniformToFill" Margin="5,5,5,0" Opacity="0.5"/>
-                                        <StackPanel Grid.Row="1" Margin="10">
-                                            <TextBlock Text="Cyberpunk 2077" Foreground="White" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
-                                            <TextBlock Text="Actualización necesaria" Foreground="Orange" FontSize="12" Margin="0,0,0,15"/>
-                                            <Button Content="ACTUALIZAR" Background="#333" Foreground="White" FontWeight="Bold" Height="40" BorderThickness="0" IsEnabled="False"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </StackPanel>
-                </Grid>
-
-            </Grid>
-
-            <!-- PANEL CHAT -->
-            <Grid x:Name="PanelChat" Grid.Column="2" Width="300" Background="#F2111111" Visibility="Collapsed" Margin="10,0,0,0">
-                <Border BorderBrush="#FF0000" BorderThickness="1,0,0,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="60"/>
-                        </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0" Background="#CC1A1A1A" BorderBrush="#333" BorderThickness="0,0,0,1">
-                            <Grid Margin="10,0">
-                                <TextBlock x:Name="TxtNombreChat" Text="AMIGO" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontSize="16"/>
-                                <Button Content="X" HorizontalAlignment="Right" Background="Transparent" Foreground="Gray" BorderThickness="0" FontSize="16" FontWeight="Bold" Cursor="Hand" Click="BtnCerrarChat_Click"/>
+                <Grid x:Name="PanelChat" Grid.Column="2" Width="300" Background="#F2111111" Visibility="Collapsed" Margin="10,0,0,0">
+                    <Border BorderBrush="#FF0000" BorderThickness="1,0,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Background="#CC1A1A1A" BorderBrush="#333" BorderThickness="0,0,0,1">
+                                <Grid Margin="10,0">
+                                    <TextBlock x:Name="TxtNombreChat" Text="AMIGO" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontSize="16"/>
+                                    <Button Content="X" HorizontalAlignment="Right" Background="Transparent" Foreground="Gray" BorderThickness="0" FontSize="16" FontWeight="Bold" Cursor="Hand" Click="BtnCerrarChat_Click"/>
+                                </Grid>
+                            </Border>
+                            <ScrollViewer x:Name="ScrollChat" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="5">
+                                <ItemsControl x:Name="ListaMensajes">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="{Binding ColorFondo}" CornerRadius="10" Padding="10,5" Margin="5,2" HorizontalAlignment="{Binding Alineacion}" MaxWidth="200">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Texto}" Foreground="White" TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding Hora}" Foreground="#AAA" FontSize="9" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <Grid Grid.Row="2" Background="#CC1A1A1A" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="txtMensaje" Background="#222" Foreground="White" BorderThickness="0" VerticalContentAlignment="Center" Padding="5" KeyDown="TxtMensaje_KeyDown"/>
+                                <Button Grid.Column="1" Content="➤" Background="#FF0000" Foreground="White" BorderThickness="0" Cursor="Hand" Click="BtnEnviarMensaje_Click"/>
                             </Grid>
-                        </Border>
-                        <ScrollViewer x:Name="ScrollChat" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="5">
-                            <ItemsControl x:Name="ListaMensajes">
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid x:Name="VistaComunidad" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2050505" Visibility="Collapsed">
+                    <Grid Margin="50,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="TxtTituloComunidad" Text="COMUNIDAD KOWIN" FontSize="36" FontWeight="Bold" Foreground="#FF0000" Margin="0,0,0,20">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Red" BlurRadius="20"/>
+                            </TextBlock.Effect></TextBlock>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                            <ItemsControl x:Name="ListaComunidad">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Background="{Binding ColorFondo}" CornerRadius="10" Padding="10,5" Margin="5,2" HorizontalAlignment="{Binding Alineacion}" MaxWidth="200">
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Texto}" Foreground="White" TextWrapping="Wrap"/>
-                                                <TextBlock Text="{Binding Hora}" Foreground="#AAA" FontSize="9" HorizontalAlignment="Right" Margin="0,2,0,0"/>
-                                            </StackPanel>
+                                        <Border Background="#CC161616" Margin="0,0,0,20" CornerRadius="8" BorderBrush="#333" BorderThickness="1" Padding="20">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+                                                    <Border Width="40" Height="40" CornerRadius="20" Background="{Binding AvatarColor}" Margin="0,0,15,0">
+                                                        <TextBlock Text="{Binding LetraInicial}" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <StackPanel VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Usuario}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                                                        <TextBlock Text="hace 2 horas" Foreground="Gray" FontSize="12"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <Grid Grid.Row="1">
+                                                    <Grid Visibility="{Binding VisibilidadReview}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0" Width="120" Height="160" CornerRadius="5" Margin="0,0,20,0">
+                                                            <Border.Background>
+                                                                <ImageBrush ImageSource="{Binding ImagenUrl}" Stretch="UniformToFill"/>
+                                                            </Border.Background>
+                                                        </Border>
+                                                        <StackPanel Grid.Column="1">
+                                                            <TextBlock Text="{Binding TituloJuego}" Foreground="#FF0000" FontSize="20" FontWeight="Bold" Margin="0,0,0,5"/>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                                                <TextBlock Text="{Binding Estrellas}" Foreground="Yellow" FontSize="16" Margin="0,0,10,0"/>
+                                                                <Border Background="{Binding ColorRecomendacion}" CornerRadius="3" Padding="8,2">
+                                                                    <TextBlock Text="{Binding TextoRecomendacion}" Foreground="White" FontSize="10" FontWeight="Bold"/>
+                                                                </Border>
+                                                            </StackPanel>
+                                                            <TextBlock Text="{Binding ContenidoTexto}" Foreground="#DDD" FontSize="14" TextWrapping="Wrap" LineHeight="20"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                    <StackPanel Visibility="{Binding VisibilidadMeme}">
+                                                        <TextBlock Text="{Binding ContenidoTexto}" Foreground="White" FontSize="18" Margin="0,0,0,15"/>
+                                                        <Border Height="400" Background="#222" CornerRadius="5">
+                                                            <Image Source="{Binding ImagenUrl}" Stretch="Uniform"/>
+                                                        </Border>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </ScrollViewer>
-                        <Grid Grid.Row="2" Background="#CC1A1A1A" Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="txtMensaje" Background="#222" Foreground="White" BorderThickness="0" VerticalContentAlignment="Center" Padding="5" KeyDown="TxtMensaje_KeyDown"/>
-                            <Button Grid.Column="1" Content="➤" Background="#FF0000" Foreground="White" BorderThickness="0" Cursor="Hand" Click="BtnEnviarMensaje_Click"/>
-                        </Grid>
                     </Grid>
-                </Border>
-            </Grid>
-
-            <!-- VISTA COMUNIDAD (OCUPA TODO) -->
-            <Grid x:Name="VistaComunidad" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2050505" Visibility="Collapsed">
-                <Grid Margin="50,20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock x:Name="TxtTituloComunidad" Text="COMUNIDAD KOWIN" FontSize="36" FontWeight="Bold" Foreground="#FF0000" Margin="0,0,0,20">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="Red" BlurRadius="20"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                        <ItemsControl x:Name="ListaComunidad">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Background="#CC161616" Margin="0,0,0,20" CornerRadius="8" BorderBrush="#333" BorderThickness="1" Padding="20">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <!-- Header Usuario -->
-                                                <RowDefinition Height="*"/>
-                                                <!-- Contenido -->
-                                            </Grid.RowDefinitions>
-
-                                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                                                <Border Width="40" Height="40" CornerRadius="20" Background="{Binding AvatarColor}" Margin="0,0,15,0">
-                                                    <TextBlock Text="{Binding LetraInicial}" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <StackPanel VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding Usuario}" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                                                    <TextBlock Text="hace 2 horas" Foreground="Gray" FontSize="12"/>
-                                                </StackPanel>
-                                            </StackPanel>
-
-                                            <Grid Grid.Row="1">
-                                                <!-- RESEÑA -->
-                                                <Grid Visibility="{Binding VisibilidadReview}">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="150"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Width="120" Height="160" CornerRadius="5" Margin="0,0,20,0">
-                                                        <Border.Background>
-                                                            <ImageBrush ImageSource="{Binding ImagenUrl}" Stretch="UniformToFill"/>
-                                                        </Border.Background>
-                                                    </Border>
-                                                    <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="{Binding TituloJuego}" Foreground="#FF0000" FontSize="20" FontWeight="Bold" Margin="0,0,0,5"/>
-                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                                                            <TextBlock Text="{Binding Estrellas}" Foreground="Yellow" FontSize="16" Margin="0,0,10,0"/>
-                                                            <Border Background="{Binding ColorRecomendacion}" CornerRadius="3" Padding="8,2">
-                                                                <TextBlock Text="{Binding TextoRecomendacion}" Foreground="White" FontSize="10" FontWeight="Bold"/>
-                                                            </Border>
-                                                        </StackPanel>
-                                                        <TextBlock Text="{Binding ContenidoTexto}" Foreground="#DDD" FontSize="14" TextWrapping="Wrap" LineHeight="20"/>
-                                                    </StackPanel>
-                                                </Grid>
-
-                                                <!-- MEME -->
-                                                <StackPanel Visibility="{Binding VisibilidadMeme}">
-                                                    <TextBlock Text="{Binding ContenidoTexto}" Foreground="White" FontSize="18" Margin="0,0,0,15"/>
-                                                    <Border Height="400" Background="#222" CornerRadius="5">
-                                                        <Image Source="{Binding ImagenUrl}" Stretch="Uniform"/>
-                                                    </Border>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
                 </Grid>
-            </Grid>
-
-            <!-- VISTA SOPORTE TÉCNICO (OCUPA TODO) -->
-            <Grid x:Name="VistaSoporte" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2050505" Visibility="Collapsed">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="600">
-                    <Border Background="#CC111111" BorderBrush="#FF0000" BorderThickness="1" CornerRadius="10" Padding="30">
-                        <StackPanel>
-                            <TextBlock x:Name="TxtTituloSoporte" Text="ATENCIÓN AL CLIENTE" FontSize="28" FontWeight="Bold" Foreground="#FF0000" HorizontalAlignment="Center" Margin="0,0,0,20">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect Color="Red" BlurRadius="10"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                            <TextBlock x:Name="TxtSubtituloSoporte" Text="Rellena todos los campos para enviarnos tu consulta." Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,30"/>
-
-                            <TextBlock x:Name="LblMotivo" Text="Motivo de contacto:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
-                            <ComboBox x:Name="cmbMotivoSoporte" Height="35" Margin="0,0,0,15" Padding="5">
-                                <ComboBoxItem Content="Problema de Inicio de Sesión"/>
-                                <ComboBoxItem Content="Error en un Juego"/>
-                                <ComboBoxItem Content="Pagos y Reembolsos"/>
-                                <ComboBoxItem Content="Reportar Jugador"/>
-                                <ComboBoxItem Content="Sugerencia / Otros"/>
-                            </ComboBox>
-
-                            <TextBlock x:Name="LblNombre" Text="Tu Nombre:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
-                            <TextBox x:Name="txtNombreSoporte" Height="35" Background="Black" Foreground="White" BorderBrush="Gray" VerticalContentAlignment="Center" Padding="5" Margin="0,0,0,15"/>
-
-                            <TextBlock x:Name="LblEmail" Text="Email de Contacto:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
-                            <TextBox x:Name="txtEmailSoporte" Height="35" Background="Black" Foreground="White" BorderBrush="Gray" VerticalContentAlignment="Center" Padding="5" Margin="0,0,0,15"/>
-
-                            <TextBlock x:Name="LblMensaje" Text="Descripción del Problema:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
-                            <TextBox x:Name="txtMensajeSoporte" Height="150" Background="Black" Foreground="White" BorderBrush="Gray" TextWrapping="Wrap" AcceptsReturn="True" Padding="5" Margin="0,0,0,20"/>
-
-                            <Button x:Name="BtnTextoEnviarTicket" Content="ENVIAR TICKET" Height="45" Background="#FF0000" Foreground="White" FontSize="16" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnEnviarTicket_Click">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="5"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-
-                            <TextBlock x:Name="lblEstadoSoporte" Foreground="Yellow" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed"/>
-                        </StackPanel>
-                    </Border>
+                <Grid x:Name="VistaSoporte" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2050505" Visibility="Collapsed">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="600">
+                        <Border Background="#CC111111" BorderBrush="#FF0000" BorderThickness="1" CornerRadius="10" Padding="30">
+                            <StackPanel>
+                                <TextBlock x:Name="TxtTituloSoporte" Text="ATENCIÓN AL CLIENTE" FontSize="28" FontWeight="Bold" Foreground="#FF0000" HorizontalAlignment="Center" Margin="0,0,0,20">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="Red" BlurRadius="10"/>
+                                    </TextBlock.Effect></TextBlock>
+                                <TextBlock x:Name="TxtSubtituloSoporte" Text="Rellena todos los campos para enviarnos tu consulta." Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                                <TextBlock x:Name="LblMotivo" Text="Motivo de contacto:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
+                                <ComboBox x:Name="cmbMotivoSoporte" Height="35" Margin="0,0,0,15" Padding="5">
+                                    <ComboBoxItem Content="Problema de Inicio de Sesión"/>
+                                    <ComboBoxItem Content="Error en un Juego"/>
+                                    <ComboBoxItem Content="Pagos y Reembolsos"/>
+                                    <ComboBoxItem Content="Reportar Jugador"/>
+                                    <ComboBoxItem Content="Sugerencia / Otros"/>
+                                </ComboBox>
+                                <TextBlock x:Name="LblNombre" Text="Tu Nombre:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
+                                <TextBox x:Name="txtNombreSoporte" Height="35" Background="Black" Foreground="White" BorderBrush="Gray" VerticalContentAlignment="Center" Padding="5" Margin="0,0,0,15"/>
+                                <TextBlock x:Name="LblEmail" Text="Email de Contacto:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
+                                <TextBox x:Name="txtEmailSoporte" Height="35" Background="Black" Foreground="White" BorderBrush="Gray" VerticalContentAlignment="Center" Padding="5" Margin="0,0,0,15"/>
+                                <TextBlock x:Name="LblMensaje" Text="Descripción del Problema:" Foreground="White" FontWeight="Bold" Margin="0,5"/>
+                                <TextBox x:Name="txtMensajeSoporte" Height="150" Background="Black" Foreground="White" BorderBrush="Gray" TextWrapping="Wrap" AcceptsReturn="True" Padding="5" Margin="0,0,0,20"/>
+                                <Button x:Name="BtnTextoEnviarTicket" Content="ENVIAR TICKET" Height="45" Background="#FF0000" Foreground="White" FontSize="16" FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="BtnEnviarTicket_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="5"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                                <TextBlock x:Name="lblEstadoSoporte" Foreground="Yellow" HorizontalAlignment="Center" Margin="0,15,0,0" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </Grid>
-            </Grid>
 
+            </Grid>
         </Grid>
     </Grid>
 </Window>
